@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+void merge(int data[],int result[],int start,int end);
+void mergesort(int  data[],int result[],int start,int end)
+{
+	if(1==end-start)
+	{
+		if(data[start]>data[end])
+		{
+			swap(data[start],data[end]);
+			return;
+		}
+	}
+	else if(0==end-start)
+		return;
+	else
+	{
+		mergesort(data,result,start,(end-start+1)/2+start);
+		mergesort(data,result,(end-start+1)/2+start+1,end);
+		merge(data,result,start,end);
+		for(int i=start;i<=end;i++)
+			data[i]=result[i];
+	}
+}
+void merge(int data[],int result[],int start,int end)
+{
+	int i=start;
+	int i_l=(end-start+1)/2+1;
+	int j=start+i_l;
+	int k=start;
+	while(i<start+i_l&&j<end+1)
+	{
+		if(data[i]<=data[j])
+			result[k++]=data[i++];
+		else
+			result[k++]=data[j++];
+	}
+	while(i<start+i_l)
+		result[k++]=data[i++];
+	while(j<end+1)
+		result[k++]=data[j++];
+}
+int main()
+{
+	int a[]={3,2,6,4,8,6,5,3,-2,-2,9,0};
+	int n=sizeof(a)/sizeof(int);
+	int result[n];
+	for(int i=0;i<n;i++)
+		cout<<a[i]<<" ";
+	mergesort(a,result,0,n-1);
+	cout<<endl;
+	for(int i=0;i<n;i++)
+		cout<<a[i]<<" ";
+}
