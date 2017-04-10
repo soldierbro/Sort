@@ -1,0 +1,27 @@
+//改进的冒泡排序
+#include<iostream>
+using namespace std;
+void bubblesort(int a[],int n)
+{
+    bool flag=true;             //标记是否还有乱序
+    for(int i=0;i<n-1&&flag;i++)
+    {
+        for(int j=n-2;j>=i;j--)
+        {
+            flag=false;
+            if(a[j]>a[j+1])
+            {
+                swap(a[j],a[j+1]);
+                flag=true;
+            }
+        }
+    }
+}
+int main()
+{
+    int a[]={3,2,6,4,8,6,5,3,-2,-2,9,0};
+    bubblesort(a,sizeof(a)/sizeof(int));
+    for(int i=0;i<sizeof(a)/sizeof(int);i++)
+        cout<<a[i]<<" ";
+    return 0;
+}
